@@ -499,14 +499,14 @@ void redirection_in(char** args){
 		}
 		
 		char* input_file = (char*)malloc(sizeof(char) * 1024);
-		strcpy(input_file, args[2]);
-		args[1] = args[2] = NULL;
+		strcpy(input_file, args[i+1]);
+		args[i] = args[i+1] = NULL;
 		if(redirectOut && !pi){
-			args[1] = (char*)malloc(sizeof(char) * strlen(args[3]));
-			args[2] = (char*)malloc(sizeof(char) * strlen(args[4]));
-			strcpy(args[1], args[3]);
-			strcpy(args[2], args[4]);
-			args[3] = args[4] = NULL;
+			args[i] = (char*)malloc(sizeof(char) * strlen(args[i+2]));
+			args[i+1] = (char*)malloc(sizeof(char) * strlen(args[i+3]));
+			strcpy(args[i], args[i+2]);
+			strcpy(args[i+1], args[i+3]);
+			args[i+2] = args[i+3] = NULL;
 		}
 		int in = open(input_file, O_RDONLY);
 		dup2(in, STDIN_FILENO);
